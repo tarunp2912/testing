@@ -37,7 +37,7 @@ jobs:
         
       - run: docker build . -t tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
       - run: echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u ${{secrets.DOCKERHUB_USERNAME}} --password-stdin
-      - run: docker push tarunp2912/bus-app::${{ steps.vars.outputs.TAG }}
+      - run: docker push tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
