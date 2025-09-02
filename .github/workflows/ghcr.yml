@@ -33,5 +33,10 @@ jobs:
         run: echo "TAG=v${GITHUB_RUN_NUMBER}" >> $GITHUB_OUTPUT
         
       - run: echo "${{secrets.GH_PAT}}" | docker login ghcr.io -u tarunp2912 --password-stdin
-      - run: docker build . -t ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
+
+      # Build the image with both the version tag and latest tag
+      - run: docker build . -t ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }} -t ghcr.io/tarunp2912/bus-app:latest
+
+      # Push both tags to GitHub Container Registry
       - run: docker push ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
+      - run: docker push ghcr.io/tarunp2912/bus-app:latest
