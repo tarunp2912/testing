@@ -39,5 +39,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: docker build . -t ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
-      - run: docker push ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
+      #- run: docker build . -t ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
+      #- run: docker push ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
+      - name: Build & Push
+        run: |
+          IMAGE=ghcr.io/${{ github.repository_owner }}/bus-app
+          docker build . -t $IMAGE:${{ steps.vars.outputs.TAG }}
+          docker push $IMAGE:${{ steps.vars.outputs.TAG }}
