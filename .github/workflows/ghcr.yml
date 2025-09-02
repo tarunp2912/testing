@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ["test"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,7 +35,7 @@ jobs:
         id: vars
         run: echo "TAG=v${GITHUB_RUN_NUMBER}" >> $GITHUB_OUTPUT
         
-      - run: echo "${{secrets.GH_PAT}}" | docker login -u tarunp2912 --password-stdin
+      - run: echo "${{secrets.GH_PAT}}" | docker login ghcr.io -u tarunp2912 --password-stdin
       - run: docker build . -t ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
       - run: docker push ghcr.io/tarunp2912/bus-app:${{ steps.vars.outputs.TAG }}
 
