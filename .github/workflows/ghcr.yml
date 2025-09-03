@@ -65,5 +65,5 @@ jobs:
           context: .
           push: true  # Push the image
           tags: |
-            ghcr.io/${{ github.repository }}/bus-app:latest
-            ghcr.io/${{ github.repository }}/bus-app:${{ steps.vars.outputs.TAG }}
+            ghcr.io/${{ github.repository }}/testing:latest
+            ghcr.io/${{ github.repository }}/testing:${{ steps.vars.outputs.TAG }}
