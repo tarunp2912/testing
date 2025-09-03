@@ -6,7 +6,7 @@ on:
   push:
     branches: ["main"]
     paths:
-      - '.github/workflows/ghcr.yml'
+      - '.github/workflows/ghcr.yml' # Only trigger if `ghcr.yml` is changed
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -67,5 +67,5 @@ jobs:
           context: .
           push: true  # Push the image
           tags: |
-            ghcr.io/${{ github.repository }}/testing:latest
-            ghcr.io/${{ github.repository }}/testing:${{ steps.vars.outputs.TAG }}
+            ghcr.io/${{ github.repository }}:latest
+            ghcr.io/${{ github.repository }}:${{ steps.vars.outputs.TAG }}
